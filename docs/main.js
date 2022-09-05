@@ -1,5 +1,5 @@
 //const axios = require('axios')
-async function getUser() {
+exports.getUser = async function getUser() {
     let __image, __detect;
     let __storage = [
         "ass", "assgif", "athighs", "bbw", "bdsm", "blow", "boobs", "feet", "furfuta", "furgif", "futa", "gifs", "hass", "hboobs", "hentai", "hfeet", "neko", "irlfemb", "jackopose", "milk", "pantsu", "sex", "slime", "thighs", "trap", "yuri", "latex"
@@ -47,6 +47,4 @@ async function getUser() {
             console.error(error);
         }
     }
-}
-
-exports.getUser = getUser;
+};
