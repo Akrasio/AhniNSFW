@@ -55,6 +55,6 @@ async function getUser() {
             console.error(error);
         }
     }
-    }
+    })
 
 }
