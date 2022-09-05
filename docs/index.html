@@ -36,12 +36,13 @@
     <title>NSFW</title>
 </head>
 <body>
-  <div id="overlay" onclick="off()"></div>
   <div id="overlay">
     <div id="text"><h2>This Page displays images of Age Restricted content</h2>
       <h3>Only Click anywhere on this site if you are over the age of 18!</h3>
           <h4>Otherwise leave this site.</h4>
       </div>
+        <div id="overlay" onclick="off()"></div>
+
       </div>
     
     <h1 style="font-size: 5vh;"> Succubus NSFW </h1>
@@ -73,10 +74,6 @@ on()
 function on() {
   document.getElementById("overlay").style.display = "block";
 }
-
-function off() {
-  document.getElementById("overlay").style.display = "none";
-}
 </script>
     <script>
         function refreshPage() {
@@ -84,6 +81,8 @@ function off() {
         }
     </script>
         <script type="module">
+            function off() {
+  document.getElementById("overlay").style.display = "none";
     let __image, __detect;
     let __storage = [
         "ass", "assgif", "athighs", "bbw", "bdsm", "blow", "boobs", "feet", "furfuta", "furgif", "futa", "gifs", "hass", "hboobs", "hentai", "hfeet", "neko", "irlfemb", "jackopose", "milk", "pantsu", "sex", "slime", "thighs", "trap", "yuri", "latex"
@@ -131,6 +130,7 @@ function off() {
             console.error(error);
         }
     }
+            }
         </script>
 </body>
 
