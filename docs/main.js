@@ -1,9 +1,5 @@
 //const axios = require('axios')
 async function getUser() {
-    var script = document.createElement('script');
-    script.src = 'js/script.js';
-    script.click(async function(actar){
-    if (actar.target.id == "y01"){
     let __image, __detect;
     let __storage = [
         "ass", "assgif", "athighs", "bbw", "bdsm", "blow", "boobs", "feet", "furfuta", "furgif", "futa", "gifs", "hass", "hboobs", "hentai", "hfeet", "neko", "irlfemb", "jackopose", "milk", "pantsu", "sex", "slime", "thighs", "trap", "yuri", "latex"
@@ -52,6 +48,4 @@ async function getUser() {
         }
     }
     }
-
-    })
 }
