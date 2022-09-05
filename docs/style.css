@@ -19,6 +19,7 @@ body {
   top: 0;
   left: 0;
   right: 0;
+  text-align: center;
   bottom: 0;
   background-color: rgba(0,0,0,1);
   z-index: 2;
