@@ -49,4 +49,4 @@ async function getUser() {
     }
 }
 
-exports.log = log;
+exports.getUser = getUser;
