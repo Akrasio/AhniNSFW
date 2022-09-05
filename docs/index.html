@@ -104,10 +104,10 @@
             __detect = response.data.result
             console.log(__detect)
             __image = __detect
-            var div = document.createElement('div');
+            var div = await document.createElement('div');
             document.getElementById("div").appendChild(div);
 
-            var img = document.createElement('img');
+            var img = await document.createElement('img');
             img.src = __image
             img.className = "img-fluid img-thumbnail rounded"
             img.style = "width:100%"
@@ -124,10 +124,10 @@
             console.log(__detect)
 
             __image = response.data.result
-            var div = document.createElement('div');
+            var div = await document.createElement('div');
             document.getElementById("div").appendChild(div);
 
-            var img = document.createElement('img');
+            var img = await document.createElement('img');
             img.src = __image
             img.className = "img-fluid img-thumbnail rounded"
             img.style = "width:100%"
@@ -137,6 +137,21 @@
         }
     }
         }
+    await $('#trigger_popup_fricc').html(`<h1 style="font-size: 5vh;"> Succubus NSFW </h1>
+    <div class="uk-child-width-1-2@s uk-child-width-1-4@m" uk-grid="masonry: true" id="div">
+    </div>
+    <div class="row">
+        <div class="col">
+            <a href="#" class="float2">
+                <i class="fas fa-arrow-up fa-lg my-float"></i>
+            </a>
+        </div>
+        <div class="col">
+            <a class="float2" type="submit" onClick="refreshPage()">
+                <p>Refresh</p>
+            </a>
+        </div>
+    </div>`)
     getUser()
         }
         }))
