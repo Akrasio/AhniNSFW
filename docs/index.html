@@ -42,9 +42,7 @@
           <h4>Otherwise leave this site.</h4>
       </div>
 
-      </div>
-            <div id="overlay" onclick="off()"></div>
-
+    </div>
     <h1 style="font-size: 5vh;"> Succubus NSFW </h1>
 
     <div class="uk-child-width-1-2@s uk-child-width-1-4@m" uk-grid="masonry: true" id="div">
@@ -134,7 +132,7 @@ $(document).ready(function() {
     }
             }
    $(document).click(function(a){
-       if (document.getElementById("overlay").style.display = "block"){
+       if (document.getElementById("overlay").style.display == "block"){
         off()
        } else {
        return;
