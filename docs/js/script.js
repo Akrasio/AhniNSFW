@@ -2,7 +2,7 @@ $(window).on("load", function () {
         $('#trigger_popup_fricc').html(`<div class="hover_bkgr_fricc" style="display: inline-block;">
         <span class="helper"></span>
         <div>
-          <h1> The site contains sexually explicit material. </h1>
+          <h2> The site contains sexually explicit material. </h2>
           <h3> Enter only if you are above the age of 18</h3>
           <td>
             <input type="text" id="ans01" class="answer" hidden/>
