@@ -48,4 +48,5 @@ async function getUser() {
         }
     }
 }
-module.exports.getUser = getUser;
+
+exports.log = log;
