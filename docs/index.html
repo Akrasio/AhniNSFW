@@ -37,7 +37,7 @@
 </head>
 <body>
   <div id="overlay">
-    <div id="text"><h2>This Page displays images of Age Restricted content</h2>
+    <div id="text" style="text-align: center;"><h2>This Page displays images of Age Restricted content</h2>
       <h3>Only Click anywhere on this site if you are over the age of 18!</h3>
           <h4>Otherwise leave this site.</h4>
       </div>
@@ -76,9 +76,6 @@ $(document).ready(function() {
   function on() {
   document.getElementById("overlay").style.display = "block";
 }
-    $(document).click(function(a){
-        off()
-    })
 </script>
     <script>
         function refreshPage() {
@@ -136,6 +133,9 @@ $(document).ready(function() {
         }
     }
             }
+   $(document).click(function(a){
+        off()
+    })
         </script>
 </body>
 
