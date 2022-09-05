@@ -1,8 +1,5 @@
 //const axios = require('axios')
-document.click(function(){
-     console.log(a)
-    if (a.target.id == "y01") return getUser()            
-})
+
 async function getUser() {
     let __image, __detect;
     let __storage = [
