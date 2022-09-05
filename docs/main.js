@@ -1,8 +1,4 @@
 //const axios = require('axios')
-
-$document.click(function(){
-     console.log(a)
-})
 async function getUser() {
     var script = document.createElement('script');
     script.src = 'js/script.js';
