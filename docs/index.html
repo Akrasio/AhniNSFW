@@ -70,7 +70,8 @@
         }
     </script>
         <script type="module">
-        $(window).on("load", function () {
+            import { getUser } from "./main.js";
+            $(window).on("load", function () {
         $('#trigger_popup_fricc').html(`<div class="hover_bkgr_fricc" style="display: inline-block;">
         <span class="helper"></span>
         <div>
@@ -88,7 +89,6 @@
     `).on("click", (function(a){
         console.log(a.target.id)
         if (a.target.id == "y01"){
-            import { getUser } from "./main.js";
             getUser()
         }
         })) 
