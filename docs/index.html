@@ -134,7 +134,11 @@ $(document).ready(function() {
     }
             }
    $(document).click(function(a){
+       if (document.getElementById("overlay").style.display = "block"){
         off()
+       } else {
+       return;
+       }
     })
         </script>
 </body>
