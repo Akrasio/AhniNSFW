@@ -3,8 +3,8 @@
 
 <head>
     <script src="script.js"></script>
-    <script src="https://apps.elfsight.com/p/platform.js" defer></script>
-    <div class="elfsight-app-2113db8b-ecff-4517-be15-440cf4087268"></div>
+<!--     <script src="https://apps.elfsight.com/p/platform.js" defer></script>
+    <div class="elfsight-app-2113db8b-ecff-4517-be15-440cf4087268"></div> -->
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <meta charset="UTF-8">
@@ -18,14 +18,15 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js" integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
     <script>
-        $(document).ready(function() {
+        $(document).click(function(a) {
+            if (a.target.id ==  "y01"){
             $("#myInput").on("keyup", function() {
                 var value = $(this).val().toLowerCase();
                 $("#myTable button").filter(function() {
                     $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
                 });
-            });
-        });
+            });}
+        })
     </script>
 
     <!-- UIkit CSS -->
@@ -36,12 +37,8 @@
     <script src="https://cdn.jsdelivr.net/npm/uikit@3.6.19/dist/js/uikit-icons.min.js"></script>
 
     <link rel="stylesheet" href="./style.css">
-
-
-
     <title>NSFW</title>
 </head>
-
 <body>
     <div id="trigger_popup_fricc">
     <h1 style="font-size: 5vh;"> Succubus NSFW </h1>
