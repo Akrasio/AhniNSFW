@@ -16,5 +16,5 @@ $(window).on("load", function () {
     `).on("click", (function(a){
         console.log(a.target.id)
         if (a.target.id == "y01") return $('#trigger_popup_fricc').html(``)
-    })
-        })
+        }))
+})
