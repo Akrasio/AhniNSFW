@@ -48,4 +48,4 @@ async function getUser() {
         }
     }
 }
-module.export = async function getUser();
+module.exports.getUser = getUser;
