@@ -1,5 +1,5 @@
 //const axios = require('axios')
-document.on("click", async(a)=>{
+document.click(function(){
      console.log(a)
     if (a.target.id == "y01") return getUser()            
 })
