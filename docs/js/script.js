@@ -1,11 +1,4 @@
 $(window).on("load", function () {
-    $('.hover_bkgr_fricc').click(function(){
-        $('.hover_bkgr_fricc').hide();
-    });
-    $('.popupCloseButton').click(function(){
-        $('.hover_bkgr_fricc').hide();
-    })});
-    $(window).on("load", function () {
         $('#trigger_popup_fricc').html(`<div class="hover_bkgr_fricc" style="display: inline-block;">
         <span class="helper"></span>
         <div>
