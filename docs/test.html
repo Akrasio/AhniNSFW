@@ -31,12 +31,6 @@ html {
   border-radius: 12px;
   width: 100px;
 }
-
-.button1 {
-  color: #808080;
-  border: 2px solid #e7e7e7;
-}
-
 .button:active,
 .button:focus,
 .button:visited {
@@ -59,43 +53,94 @@ th {
 tr:nth-child(even) {
   background-color: #f2f2f2;
 }
+    .hover_bkgr_fricc{
+    background:rgba(0,0,0,.4);
+    cursor:pointer;
+    display:none;
+    height:100%;
+    position:fixed;
+    text-align:center;
+    top:0;
+    width:100%;
+    z-index:10000;
+}
+.hover_bkgr_fricc .helper{
+    display:inline-block;
+    height:100%;
+    vertical-align:middle;
+}
+.hover_bkgr_fricc > div {
+    background-color: #fff;
+    box-shadow: 10px 10px 60px #555;
+    display: inline-block;
+    height: auto;
+    max-width: 551px;
+    min-height: 100px;
+    vertical-align: middle;
+    width: 60%;
+    position: relative;
+    border-radius: 8px;
+    padding: 15px 5%;
+}
+.popupCloseButton {
+    background-color: #fff;
+    border: 3px solid #999;
+    border-radius: 50px;
+    cursor: pointer;
+    display: inline-block;
+    font-family: arial;
+    font-weight: bold;
+    position: absolute;
+    top: -20px;
+    right: -20px;
+    font-size: 25px;
+    line-height: 30px;
+    width: 30px;
+    height: 30px;
+    text-align: center;
+}
+.popupCloseButton:hover {
+    background-color: #ccc;
+}
+.trigger_popup_fricc {
+    cursor: pointer;
+    font-size: 20px;
+    margin: 20px;
+    display: inline-block;
+    font-weight: bold;
+}
+/* Popup box BEGIN */
+
     </style>
-</head>
+<script>
+    $(window).load(function () {
+    $(".trigger_popup_fricc").click(function(){
+       $('.hover_bkgr_fricc').show();
+    });
+    $('.hover_bkgr_fricc').click(function(){
+        $('.hover_bkgr_fricc').hide();
+    });
+    $('.popupCloseButton').click(function(){
+        $('.hover_bkgr_fricc').hide();
+    });
+});
+</script>
+    </head>
 
 <body>
-    <script>
-    $(".button1").click(function() {
-  var otherButton = this.value == "Yes" ? "No" : "Yes";
-  $(this).css({'background':'#0080FF', 'color':'white'});
-  $(this).siblings(`.button1[value=${otherButton}]`).css({'background':'transparent', 'color':'#808080'});
-  $(this).siblings(".answer").val(this.value);
-});
-
-    </script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<table>
-
-  <tr>
-    <td style="text-align:right;">
-      Do you have any question #1?
-    </td>
+<div class="hover_bkgr_fricc">
+    <span class="helper"></span>
+    <div>
+        <div class="popupCloseButton">&times;</div>
+  <h1> The site contains sexually explicit material. </h1>
+    <h3> Enter only if you are above the age of 18</h3>
     <td>
       <input type="text" id="ans01" class="answer" hidden/>
-      <input type="button" id="y01" class="button button1" value="Yes" />
-      <input type="button" id="n01" class="button button1" value="No" />
+      <input type="button" id="y01" class="button button1" value="I am above the age of 18." />
+      <input type="button" id="n01" class="button button1" value="I am not above the age of 18." />
     </td>
-  </tr>
-
-  <tr>
-    <td style="text-align:right;">
-      Do you have any question #2?
-    </td>
-    <td>
-      <input type="text" id="ans02" class="answer" hidden/>
-      <input type="button" id="y02" class="button button1" value="Yes" />
-      <input type="button" id="n02" class="button button1" value="No" />
-    </td>
-  </tr>
-
+    </div>
+</div>
+    
 </body>
 </html>
