@@ -1,11 +1,11 @@
-$(window).load(function () {
+$(window).on("load", function () {
     $('.hover_bkgr_fricc').click(function(){
         $('.hover_bkgr_fricc').hide();
     });
     $('.popupCloseButton').click(function(){
         $('.hover_bkgr_fricc').hide();
     })});
-    $(window).load(function init(){
+    $(window).on("load", function () {
         $('#trigger_popup_fricc').html(`<div class="hover_bkgr_fricc" style="display: inline-block;">
         <span class="helper"></span>
         <div>
@@ -20,7 +20,7 @@ $(window).load(function () {
         </tr>  
         </div>
       </div>
-    `).click(function(a){
+    `).on("click", (function(a){
         console.log(a.target.id)
         if (a.target.id == "y01") return $('#trigger_popup_fricc').html(``)
     })
