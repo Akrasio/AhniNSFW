@@ -94,8 +94,8 @@
         "ass", "assgif", "athighs", "bbw", "bdsm", "blow", "boobs", "feet", "furfuta", "furgif", "futa", "gifs", "hass", "hboobs", "hentai", "hfeet", "neko", "irlfemb", "jackopose", "milk", "pantsu", "sex", "slime", "thighs", "trap", "yuri", "latex"
     ]
 
-    __storage = __storage.sort(() => Math.random() - 0.5);
-    __starting_point = Math.floor(Math.random() * __storage.length);
+    let __storage = __storage.sort(() => Math.random() - 0.5);
+    let __starting_point = Math.floor(Math.random() * __storage.length);
     console.log(__storage.length)
     for (j = __starting_point; j < __storage.length; j++) {
         let __subreddit = __storage[j]
