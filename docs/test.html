@@ -7,10 +7,71 @@
     <meta name="description" content="">
     <meta name="author" content="">
     <title>Age Verification Demo</title>
+    
+<style>
+    body,
+html {
+  width: 100%;
+  height: 100%;
+  padding: 0;
+  margin: 0;
+  background-color: fff;
+}
+
+.button {
+  background: transparent;
+  color: white;
+  padding: 15px 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+  border-radius: 12px;
+  width: 100px;
+}
+
+.button1 {
+  color: #808080;
+  border: 2px solid #e7e7e7;
+}
+
+.button:active,
+.button:focus,
+.button:visited {
+  outline: none;
+}
+
+table {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+td,
+th {
+  border: none;
+  padding: 15px;
+  width: 50%;
+}
+
+tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+    </style>
 </head>
 
 <body>
+    <script>
+    $(".button1").click(function() {
+  var otherButton = this.value == "Yes" ? "No" : "Yes";
+  $(this).css({'background':'#0080FF', 'color':'white'});
+  $(this).siblings(`.button1[value=${otherButton}]`).css({'background':'transparent', 'color':'#808080'});
+  $(this).siblings(".answer").val(this.value);
+});
 
+    </script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <table>
 
