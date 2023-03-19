@@ -90,7 +90,7 @@ $(document).ready(function() {
         let APIKEYs = prompt("Please enter your API_KEY");
         localStorage.setItem("API_KEY", APIKEYs);
     }
-    await axios.get('https://kyra.tk/v2/nsfw/img?end=' + "ass" + '&apikey'+ localStorage.getItem("API_KEY")).catch(err =>{
+    await axios.get('https://kyra.tk/v2/nsfw/img?end=' + "ass" + '&apikey'+ localStorage.getItem("API_KEY")).then(err =>{
     if (err.code == 401){
         let APIKEYs = prompt("Please enter your API_KEY");
         if (APIKEYs == null) return APIKEYs;
