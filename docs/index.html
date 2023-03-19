@@ -112,7 +112,7 @@ $(document).ready(function() {
             div.appendChild(img);
         } catch (error) {
             console.error(error);
-            if (error.code == 401) {
+            if (error.message.match("401")) {
             let APIKEYs = prompt("Last API KEY was invalid; Please provide a valid one:");
             localStorage.setItem("API_KEY", APIKEYs);    
             }
