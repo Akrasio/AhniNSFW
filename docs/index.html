@@ -112,6 +112,10 @@ $(document).ready(function() {
             div.appendChild(img);
         } catch (error) {
             console.error(error);
+            if (response.data.code == "401) {
+            let APIKEYs = prompt("Last API KEY was invalid; Please provide a valid one:");
+            localStorage.setItem("API_KEY", APIKEYs);    
+            }
         }
     }
     for (j = __starting_point - 1; j >= 0; j--) {
