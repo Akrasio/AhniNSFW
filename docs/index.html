@@ -86,10 +86,9 @@ $(document).ready(function() {
     let __storage = [
         "ass", "assgif", "athighs", "bbw", "bdsm", "blow", "boobs", "feet", "furfuta", "furgif", "futa", "gifs", "hass", "hboobs", "hentai", "hfeet", "neko", "irlfemb", "jackopose", "milk", "pantsu", "sex", "slime", "thighs", "trap", "yuri", "latex"
     ]
-    let APIKEYs = prompt("Please enter your API_KEY", "API_KEY");
     if (localStorage.getItem("API_KEY") == null) {
         let APIKEYs = prompt("Please enter your API_KEY");
-        localStorage.setItem(API_KEY, APIKEYs);
+        localStorage.setItem("API_KEY", APIKEYs);
     }
 
     let j = 0;
