@@ -94,7 +94,7 @@ $(document).ready(function() {
     for (j = __starting_point; j < __storage.length; j++) {
         let __subreddit = __storage[j]
         try {
-            const response = await axios.get('https://kyra.tk/v2/nsfw/img?end=' + __subreddit + '&apikey'+ process.env.APIKEY);
+            const response = await axios.get('https://kyra.tk/v2/nsfw/img?end=' + __subreddit + '&apikey'+ localStorage.getItem("API_KEY"));
             __detect = response.data.result
             console.log(__detect)
             __image = __detect
@@ -113,7 +113,7 @@ $(document).ready(function() {
     for (j = __starting_point - 1; j >= 0; j--) {
         let __subreddit = __storage[j]
         try {
-            const response = await axios.get('https://kyra.tk/v2/nsfw/img?end=' + __subreddit + '&apikey=' + process.env.APIKEY);
+            const response = await axios.get('https://kyra.tk/v2/nsfw/img?end=' + __subreddit + '&apikey=' + localStorage.getItem("API_KEY"));
             __detect = response.data.result
             console.log(__detect)
 
