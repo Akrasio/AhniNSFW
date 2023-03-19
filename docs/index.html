@@ -108,7 +108,7 @@ if (err.message.endsWith(401)){
     for (j = __starting_point; j < __storage.length; j++) {
         let __subreddit = __storage[j]
         try {
-            await new Promise(resolve => setTimeout(resolve, 3000));
+            await new Promise(resolve => setTimeout(resolve, 1000));
             const response = await axios.get('https://kyra.tk/v2/nsfw/img?end=' + __subreddit + '&apikey='+ localStorage.getItem("API_KEY")).catch(err =>{})
             __detect = response.data.result
             console.log(__detect)
