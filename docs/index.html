@@ -16,7 +16,6 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js" integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
     <script>
-        
             $("#myInput").on("keyup", function() {
                 var value = $(this).val().toLowerCase();
                 $("#myTable button").filter(function() {
@@ -87,6 +86,12 @@ $(document).ready(function() {
     let __storage = [
         "ass", "assgif", "athighs", "bbw", "bdsm", "blow", "boobs", "feet", "furfuta", "furgif", "futa", "gifs", "hass", "hboobs", "hentai", "hfeet", "neko", "irlfemb", "jackopose", "milk", "pantsu", "sex", "slime", "thighs", "trap", "yuri", "latex"
     ]
+    let APIKEYs = prompt("Please enter your API_KEY", "API_KEY");
+    if (localStorage.getItem("API_KEY") == null) {
+        let APIKEYs = prompt("Please enter your API_KEY");
+        localStorage.setItem(API_KEY, APIKEYs);
+    }
+
     let j = 0;
     __storage = __storage.sort(() => Math.random() - 0.5);
     let __starting_point = Math.floor(Math.random() * __storage.length);
