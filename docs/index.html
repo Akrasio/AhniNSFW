@@ -90,13 +90,17 @@ $(document).ready(function() {
         let APIKEYs = prompt("Please enter your API_KEY");
         localStorage.setItem("API_KEY", APIKEYs);
     }
-    await axios.get('https://kyra.tk/v2/nsfw/img?end=' + "ass" + '&apikey'+ localStorage.getItem("API_KEY")).then(async(err) =>{
-    if (err.code == 401){
-        let APIKEYs = prompt("Please enter your API_KEY");
-        if (APIKEYs == null) await APIKEYs;
-        localStorage.setItem("API_KEY", APIKEYs);
-    }
+    aasync function heck(){
+        let errCde = await axios.get('https://kyra.tk/v2/nsfw/img?end=' + "ass" + '&apikey='+ localStorage.getItem("API_KEY")).catch(async(err) =>{
+if (err.message.endsWith(401)){
+            let APIKEYs = await prompt("Please enter a VALID API_KEY");
+            if (!APIKEYs) await heck();
+            localStorage.setItem("API_KEY", APIKEYs);
+            return heck()
+        } else {}
     })
+}
+    heck()
     let j = 0;
     __storage = __storage.sort(() => Math.random() - 0.5);
     let __starting_point = Math.floor(Math.random() * __storage.length);
