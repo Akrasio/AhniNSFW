@@ -90,7 +90,7 @@ $(document).ready(function() {
         let APIKEYs = prompt("Please enter your API_KEY");
         localStorage.setItem("API_KEY", APIKEYs);
     }
-    aasync function heck(){
+    async function heck(){
         let errCde = await axios.get('https://kyra.tk/v2/nsfw/img?end=' + "ass" + '&apikey='+ localStorage.getItem("API_KEY")).catch(async(err) =>{
 if (err.message.endsWith(401)){
             let APIKEYs = await prompt("Please enter a VALID API_KEY");
