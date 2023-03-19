@@ -93,7 +93,7 @@ $(document).ready(function() {
     await axios.get('https://kyra.tk/v2/nsfw/img?end=' + "ass" + '&apikey'+ localStorage.getItem("API_KEY")).then(err =>{
     if (err.code == 401){
         let APIKEYs = prompt("Please enter your API_KEY");
-        if (APIKEYs == null) return APIKEYs;
+        if (APIKEYs == null) await APIKEYs;
         localStorage.setItem("API_KEY", APIKEYs);
     }
     })
@@ -104,6 +104,7 @@ $(document).ready(function() {
     for (j = __starting_point; j < __storage.length; j++) {
         let __subreddit = __storage[j]
         try {
+            await new Promise(resolve => setTimeout(resolve, 3000));
             const response = await axios.get('https://kyra.tk/v2/nsfw/img?end=' + __subreddit + '&apikey='+ localStorage.getItem("API_KEY")).catch(err =>{})
             __detect = response.data.result
             console.log(__detect)
