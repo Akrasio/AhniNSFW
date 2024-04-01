@@ -91,7 +91,7 @@ $(document).ready(function() {
         localStorage.setItem("API_KEY", APIKEYs);
     }
     async function heck(){
-        let errCde = await axios.get('https://lewds.fun/v2/nsfw/img?end=' + "ass" + '&apikey='+ localStorage.getItem("API_KEY")).catch(async(err) =>{
+        let errCde = await axios.get('https://lewds.fun/v2/nsfw/img?end=' + "ass" + '&apikey='+ "T3ST4P1K3Y").catch(async(err) =>{
 if (err.message.endsWith(401)){
             let APIKEYs = await prompt("Please enter a VALID API_KEY");
             if (!APIKEYs) await heck();
@@ -109,7 +109,7 @@ if (err.message.endsWith(401)){
         let __subreddit = __storage[j]
         try {
             await new Promise(resolve => setTimeout(resolve, 1000));
-            const response = await axios.get('https://lewds.fun/v2/nsfw/img?end=' + __subreddit + '&apikey='+ localStorage.getItem("API_KEY")).catch(err =>{})
+            const response = await axios.get('https://lewds.fun/v2/nsfw/img?end=' + __subreddit + '&apikey='+ "T3ST4P1K3Y").catch(err =>{})
             __detect = response.data.result
             console.log(__detect)
             __image = __detect
@@ -132,7 +132,7 @@ if (err.message.endsWith(401)){
     for (j = __starting_point - 1; j >= 0; j--) {
         let __subreddit = __storage[j]
         try {
-            const response = await axios.get('https://lewds.fun/v2/nsfw/img?end=' + __subreddit + '&apikey=' + localStorage.getItem("API_KEY"));
+            const response = await axios.get('https://lewds.fun/v2/nsfw/img?end=' + __subreddit + '&apikey=' + "T3ST4P1K3Y");
             __detect = response.data.result
             console.log(__detect)
 
