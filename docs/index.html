@@ -91,7 +91,7 @@ $(document).ready(function() {
 //         localStorage.setItem("API_KEY", APIKEYs);
 //     }
 //     async function heck(){
-//         let errCde = await axios.get('https://aunnux.com/nsfw/' + "ass" + '&apikey='+ "T3ST4P1K3Y").catch(async(err) =>{
+//         let errCde = await axios.get('https://aunnux.com/nsfw/' + "ass").catch(async(err) =>{
 // if (err.message.endsWith(401)){
 //             let APIKEYs = await prompt("Please enter a VALID API_KEY");
 //             if (!APIKEYs) await heck();
@@ -109,7 +109,7 @@ $(document).ready(function() {
         let __subreddit = __storage[j]
         try {
             await new Promise(resolve => setTimeout(resolve, 1000));
-            const response = await axios.get('https://cdn.aunnux.com/api/' + __subreddit + '&apikey='+ "T3ST4P1K3Y").catch(err =>{})
+            const response = await axios.get('https://cdn.aunnux.com/api/' + __subreddit).catch(err =>{})
             __detect = response.data
             console.log(__detect)
             __image = __detect
@@ -132,7 +132,7 @@ $(document).ready(function() {
     for (j = __starting_point - 1; j >= 0; j--) {
         let __subreddit = __storage[j]
         try {
-            const response = await axios.get('https://cdn.aunnux.com/api/' + __subreddit + '&apikey=' + "T3ST4P1K3Y");
+            const response = await axios.get('https://cdn.aunnux.com/api/' + __subreddit);
             __detect = response.data
             console.log(__detect)
 
