@@ -109,7 +109,7 @@ $(document).ready(function() {
         let __subreddit = __storage[j]
         try {
             await new Promise(resolve => setTimeout(resolve, 1000));
-            const response = await axios.get('https://cdn.aunnux.com/api/' + __subreddit).catch(err =>{})
+            const response = await axios.get('https://cdn.aunnux.com/api/' + __subreddit, headers: {"Access-Control-Allow-Origin": "*"}).catch(err =>{})
             __detect = response.data
             console.log(__detect)
             __image = __detect
@@ -132,7 +132,7 @@ $(document).ready(function() {
     for (j = __starting_point - 1; j >= 0; j--) {
         let __subreddit = __storage[j]
         try {
-            const response = await axios.get('https://cdn.aunnux.com/api/' + __subreddit);
+            const response = await axios.get('https://cdn.aunnux.com/api/' + __subreddit, headers: {"Access-Control-Allow-Origin": "*"});
             __detect = response.data
             console.log(__detect)
 
