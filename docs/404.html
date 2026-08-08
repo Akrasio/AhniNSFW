@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Media Fetch Viewer</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            background: #111;
+            color: #f5f5f5;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            padding: 24px;
+            box-sizing: border-box;
+        }
+
+        .container {
+            width: min(900px, 100%);
+            background: #1c1c1c;
+            border: 1px solid #333;
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
+        }
+
+        h1 {
+            margin-top: 0;
+            font-size: 1.4rem;
+        }
+
+        .buttons {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 16px;
+        }
+
+        button {
+            padding: 10px 14px;
+            border: none;
+            border-radius: 8px;
+            background: #007bff;
+            color: white;
+            cursor: pointer;
+            font-size: 0.95rem;
+        }
+
+        button:hover {
+            background: #005ecb;
+        }
+
+        .result {
+            margin-top: 18px;
+            padding: 14px;
+            background: #222;
+            border-radius: 10px;
+            min-height: 220px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+
+        .result .media {
+            max-width: 100%;
+            max-height: 420px;
+            border-radius: 8px;
+            margin-top: 12px;
+        }
+
+        .status {
+            color: #d0d0d0;
+            margin-bottom: 8px;
+        }
+
+        .status.error {
+            color: #ff7d7d;
+        }
+
+        .url {
+            font-size: 0.9rem;
+            color: #bbb;
+            word-break: break-all;
+            margin-top: 6px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="overlay">
+        <div id="text" style="text-align: center;">
+            <h2>This Page displays images of Age Restricted content</h2>
+            <h3>Only Click anywhere on this site if you are over the age of 18!</h3>
+            <h4>Otherwise leave this site.</h4>
+        </div>
+    </div>
+    <div class="container" id="container">
+        <h3>Fetch NSFW Media</h3>
+        <h1>You are able to press "R" to refresh the page.</h1>
+        <p>Click a button to display the media as an image or video.</p>
+        <p>Note: All media may be NSFW. Please proceed with caution. Some media may not display correctly due to
+            browser
+            restrictions or content type.</p>
+        <div id="buttons" class="buttons"></div>
+        <div id="result" class="result">
+            <div class="status">Choose a button to load media.</div>
+        </div>
+    </div>
+
+    <script>
+        $(document).ready(function () {
+            on()
+        })
+        function on() {
+            document.getElementById("overlay").style.display = "block";
+            document.getElementById("container").style.display = "none";
+        }
+        async function off() {
+            document.getElementById("overlay").style.display = "none";
+            document.getElementById("container").style.display = "block";
+        }
+        const mediaSources = [
+
+            {
+                label: 'NSFW Real Video',
+                url: 'https://cdn.aunnux.com/api/videos'
+            }, {
+                label: 'NSFW Animated Video',
+                url: 'https://cdn.aunnux.com/api/hvideos'
+            }, {
+                label: 'Real Ass Image',
+                url: 'https://cdn.aunnux.com/api/ass'
+            }, {
+                label: 'Real Boobs Image',
+                url: 'https://cdn.aunnux.com/api/boobs'
+            },
+            {
+                label: 'BDSM Ass gif',
+                url: 'https://cdn.aunnux.com/api/assgif'
+            },
+            {
+                label: 'Real BDSM Image',
+                url: 'https://cdn.aunnux.com/api/bdsm'
+            },
+            {
+                label: 'Real BBW gif',
+                url: 'https://cdn.aunnux.com/api/bbw'
+            }, {
+                label: 'Animated Blowjob Image',
+                url: 'https://cdn.aunnux.com/api/blow'
+            },
+            {
+                label: 'Animated Thighs Image',
+                url: 'https://cdn.aunnux.com/api/athighs'
+            },
+            {
+                label: 'Real Thighs Image',
+                url: 'https://cdn.aunnux.com/api/thighs'
+            }, {
+                label: 'Sex Image',
+                url: 'https://cdn.aunnux.com/api/fuck'
+            },
+            {
+                label: 'Animated Femboy Image',
+                url: 'https://cdn.aunnux.com/api/femboy'
+            },
+            {
+                label: 'Animated Futa Image',
+                url: 'https://cdn.aunnux.com/api/futa'
+            }, {
+                label: 'Animated Fur gif',
+                url: 'https://cdn.aunnux.com/api/furgif'
+            },
+            {
+                label: 'Animated Slime Girl Image',
+                url: 'https://cdn.aunnux.com/api/slime'
+            }, {
+                label: 'Animated furfuta Image',
+                url: 'https://cdn.aunnux.com/api/furfuta'
+            }, {
+                label: 'Feet Image',
+                url: 'https://cdn.aunnux.com/api/feet'
+            }, {
+                label: 'Femboy Image',
+                url: 'https://cdn.aunnux.com/api/irlfemb'
+            }, {
+                label: 'Animated Tentacle Image',
+                url: 'https://cdn.aunnux.com/api/tentacle'
+            }, {
+                label: 'Animated JackOPose Image',
+                url: 'https://cdn.aunnux.com/api/jackopose'
+            }, {
+                label: 'Animated Milk Image',
+                url: 'https://cdn.aunnux.com/api/milk'
+            }, {
+                label: 'Animated Pantsu Image',
+                url: 'https://cdn.aunnux.com/api/pantsu'
+            }, {
+                label: 'Animated Latex Image',
+                url: 'https://cdn.aunnux.com/api/latex'
+            }, {
+                label: 'Animated Yuri Image',
+                url: 'https://cdn.aunnux.com/api/yuri'
+            }
+        ];
+        "ass", "assgif", "athighs", "bbw", "bdsm", "blow", "boobs", "waifu", "feet", "femboy", "fuck", "furfuta", "furgif", "futa", "gifs", "hass", "hboobs", "hentai", "hfeet", "neko", "irlfemb", "tentacle", "jackopose", "milk", "pantsu", "sex", "slime", "thighs", "trap", "yuri", "latex"
+
+        const buttonsContainer = document.getElementById('buttons');
+        const resultContainer = document.getElementById('result');
+        let currentObjectUrl = null;
+        let cz2;
+        mediaSources.forEach(async ({ label, url }) => {
+            const feature = async () => {
+                const cz = await fetch(url);
+                cz2 = await cz.json();
+                return cz2;
+            };
+            const button = document.createElement('button');
+            button.textContent = label;
+            button.addEventListener('click', async () => loadMedia(await feature(), label));
+            buttonsContainer.appendChild(button);
+        });
+
+        async function loadMedia(url, label) {
+            if (currentObjectUrl) {
+                URL.revokeObjectURL(currentObjectUrl);
+                currentObjectUrl = null;
+            }
+            resultContainer.innerHTML = `<div class="status">Loading ${label}...</div>`;
+
+            try {
+                console.log('Response:', String(await url).split('.')[3]);
+
+                const contentType = (String(await url).split('.')[3] || '');
+                const finalUrl = await url;
+                const blob = await url;
+                const mediaType = detectMediaType(finalUrl, contentType);
+
+                if (!mediaType) {
+                    resultContainer.innerHTML = `
+            <div class="status error">Unsupported content type.</div>
+            <div class="url">${url}</div>
+          `;
+                    return;
+                }
+
+                const wrapper = document.createElement('div');
+                wrapper.innerHTML = `
+          <div class="status">Loaded: ${label}</div>
+        `;
+
+                if (mediaType === 'image') {
+                    const img = document.createElement('img');
+                    img.src = cz2;
+                    img.alt = label;
+                    img.className = 'media';
+                    wrapper.appendChild(img);
+                } else {
+                    const video = document.createElement('video');
+                    video.src = cz2;
+                    video.controls = false;
+                    video.autoplay = true;
+                    video.loop = true;
+                    video.muted = false;
+                    video.disablePictureInPicture = true;
+                    video.className = 'media';
+                    wrapper.appendChild(video);
+                }
+
+                resultContainer.innerHTML = '';
+                resultContainer.appendChild(wrapper);
+            } catch (error) {
+                resultContainer.innerHTML = `
+          <div class="status error">Failed to load media.</div>
+          <div class="url">${error.message}</div>
+        `;
+            }
+        }
+
+        function detectMediaType(url, contentType) {
+            const lowerUrl = url
+            const imageExtension = /(png|jpe?g|gif|webp|bmp|svg)$/i;
+            const videoExtension = /(mp4|webm|ogg|mov|m4v|avi|mkv)$/i;
+
+            if (imageExtension.test(lowerUrl)) {
+                return 'image';
+            }
+
+            if (videoExtension.test(lowerUrl)) {
+                return 'video';
+            }
+
+            return null;
+        }
+        $(document).click(function (a) {
+            if (document.getElementById("overlay").style.display == "block") {
+                off()
+            } else {
+            }
+        })
+
+        document.addEventListener('contextmenu', (event) => event.preventDefault());
+        document.addEventListener('keydown', (event) => event.key !== 'r' ? event.preventDefault() : window.location.reload());
+    </script>
+</body>
+
+</html>
