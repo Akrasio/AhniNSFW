@@ -2,162 +2,313 @@
 <html lang="en">
 
 <head>
-    <!--<script src="https://apps.elfsight.com/p/platform.js" defer></script>
-    <div class="elfsight-app-2113db8b-ecff-4517-be15-440cf4087268"></div> -->
-    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js" integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
-    <script>
-            $("#myInput").on("keyup", function() {
-                var value = $(this).val().toLowerCase();
-                $("#myTable button").filter(function() {
-                    $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
-                });
-            })
-    </script>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Media Fetch Viewer</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            background: #111;
+            color: #f5f5f5;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            padding: 24px;
+            box-sizing: border-box;
+        }
 
-    <!-- UIkit CSS -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/uikit@3.6.19/dist/css/uikit.min.css" />
+        .container {
+            width: min(900px, 100%);
+            background: #1c1c1c;
+            border: 1px solid #333;
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
+        }
 
-    <!-- UIkit JS -->
-    <script src="https://cdn.jsdelivr.net/npm/uikit@3.6.19/dist/js/uikit.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/uikit@3.6.19/dist/js/uikit-icons.min.js"></script>
+        h1 {
+            margin-top: 0;
+            font-size: 1.4rem;
+        }
 
-    <link rel="stylesheet" href="./style.css">
-    <title>NSFW</title>
+        .buttons {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 16px;
+        }
+
+        button {
+            padding: 10px 14px;
+            border: none;
+            border-radius: 8px;
+            background: #007bff;
+            color: white;
+            cursor: pointer;
+            font-size: 0.95rem;
+        }
+
+        button:hover {
+            background: #005ecb;
+        }
+
+        .result {
+            margin-top: 18px;
+            padding: 14px;
+            background: #222;
+            border-radius: 10px;
+            min-height: 220px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+
+        .result .media {
+            max-width: 100%;
+            max-height: 420px;
+            border-radius: 8px;
+            margin-top: 12px;
+        }
+
+        .status {
+            color: #d0d0d0;
+            margin-bottom: 8px;
+        }
+
+        .status.error {
+            color: #ff7d7d;
+        }
+
+        .url {
+            font-size: 0.9rem;
+            color: #bbb;
+            word-break: break-all;
+            margin-top: 6px;
+        }
+    </style>
 </head>
+
 <body>
-  <div id="overlay">
-    <div id="text" style="text-align: center;"><h2>This Page displays images of Age Restricted content</h2>
-      <h3>Only Click anywhere on this site if you are over the age of 18!</h3>
-          <h4>Otherwise leave this site.</h4>
-      </div>
-
-    </div>
-    <h1 style="font-size: 5vh;"> NSFW Vault </h1>
-
-    <div class="uk-child-width-1-2@s uk-child-width-1-4@m" uk-grid="masonry: true" id="div">
-    </div>
-    <div class="row">
-        <div class="col">
-            <a href="#" class="float2">
-                <i class="fas fa-arrow-up fa-lg my-float"></i>
-            </a>
+    <div id="overlay">
+        <div id="text" style="text-align: center;">
+            <h2>This Page displays images of Age Restricted content</h2>
+            <h3>Only Click anywhere on this site if you are over the age of 18!</h3>
+            <h4>Otherwise leave this site.</h4>
         </div>
-        <div class="col">
-            <a class="float2" type="submit" onClick="refreshPage()">
-                <p>Refresh</p>
-            </a>
+    </div>
+    <div class="container" id="container">
+        <h3>Fetch NSFW Media</h3>
+        <h1>You are able to press "R" to refresh the page.</h1>
+        <p>Click a button to display the media as an image or video.</p>
+        <p>Note: All media may be NSFW. Please proceed with caution. Some media may not display correctly due to
+            browser
+            restrictions or content type.</p>
+        <div id="buttons" class="buttons"></div>
+        <div id="result" class="result">
+            <div class="status">Choose a button to load media.</div>
         </div>
-
     </div>
 
-    <!--pc only-->
-    <div class="middle">
-        <h2 id="root"></h2>
-    </div>
-
-    <!--javascript-->
-<script>
-$(document).ready(function() {
-    on()
-})
-  function on() {
-  document.getElementById("overlay").style.display = "block";
-}
-</script>
     <script>
-        function refreshPage() {
-            window.location.reload();
+        $(document).ready(function () {
+            on()
+        })
+        function on() {
+            document.getElementById("overlay").style.display = "block";
+            document.getElementById("container").style.display = "none";
         }
-    </script>
-        <script type="module">
-           async function off() {
-    document.getElementById("overlay").style.display = "none";
-    let __image, __detect;
-    let __storage = [
+        async function off() {
+            document.getElementById("overlay").style.display = "none";
+            document.getElementById("container").style.display = "block";
+        }
+        const mediaSources = [
+
+            {
+                label: 'NSFW Real Video',
+                url: 'https://cdn.aunnux.com/api/videos'
+            }, {
+                label: 'NSFW Animated Video',
+                url: 'https://cdn.aunnux.com/api/hvideos'
+            }, {
+                label: 'Real Ass Image',
+                url: 'https://cdn.aunnux.com/api/ass'
+            }, {
+                label: 'Real Boobs Image',
+                url: 'https://cdn.aunnux.com/api/boobs'
+            },
+            {
+                label: 'BDSM Ass gif',
+                url: 'https://cdn.aunnux.com/api/assgif'
+            },
+            {
+                label: 'Real BDSM Image',
+                url: 'https://cdn.aunnux.com/api/bdsm'
+            },
+            {
+                label: 'Real BBW gif',
+                url: 'https://cdn.aunnux.com/api/bbw'
+            }, {
+                label: 'Animated Blowjob Image',
+                url: 'https://cdn.aunnux.com/api/blow'
+            },
+            {
+                label: 'Animated Thighs Image',
+                url: 'https://cdn.aunnux.com/api/athighs'
+            },
+            {
+                label: 'Real Thighs Image',
+                url: 'https://cdn.aunnux.com/api/thighs'
+            }, {
+                label: 'Sex Image',
+                url: 'https://cdn.aunnux.com/api/fuck'
+            },
+            {
+                label: 'Animated Femboy Image',
+                url: 'https://cdn.aunnux.com/api/femboy'
+            },
+            {
+                label: 'Animated Futa Image',
+                url: 'https://cdn.aunnux.com/api/futa'
+            }, {
+                label: 'Animated Fur gif',
+                url: 'https://cdn.aunnux.com/api/furgif'
+            },
+            {
+                label: 'Animated Slime Girl Image',
+                url: 'https://cdn.aunnux.com/api/slime'
+            }, {
+                label: 'Animated furfuta Image',
+                url: 'https://cdn.aunnux.com/api/furfuta'
+            }, {
+                label: 'Feet Image',
+                url: 'https://cdn.aunnux.com/api/feet'
+            }, {
+                label: 'Femboy Image',
+                url: 'https://cdn.aunnux.com/api/irlfemb'
+            }, {
+                label: 'Animated Tentacle Image',
+                url: 'https://cdn.aunnux.com/api/tentacle'
+            }, {
+                label: 'Animated JackOPose Image',
+                url: 'https://cdn.aunnux.com/api/jackopose'
+            }, {
+                label: 'Animated Milk Image',
+                url: 'https://cdn.aunnux.com/api/milk'
+            }, {
+                label: 'Animated Pantsu Image',
+                url: 'https://cdn.aunnux.com/api/pantsu'
+            }, {
+                label: 'Animated Latex Image',
+                url: 'https://cdn.aunnux.com/api/latex'
+            }, {
+                label: 'Animated Yuri Image',
+                url: 'https://cdn.aunnux.com/api/yuri'
+            }
+        ];
         "ass", "assgif", "athighs", "bbw", "bdsm", "blow", "boobs", "waifu", "feet", "femboy", "fuck", "furfuta", "furgif", "futa", "gifs", "hass", "hboobs", "hentai", "hfeet", "neko", "irlfemb", "tentacle", "jackopose", "milk", "pantsu", "sex", "slime", "thighs", "trap", "yuri", "latex"
-    ]
-//     if (localStorage.getItem("API_KEY") == null) {
-//         let APIKEYs = prompt("Please enter your API_KEY");
-//         localStorage.setItem("API_KEY", APIKEYs);
-//     }
-//     async function heck(){
-//         let errCde = await axios.get('https://aunnux.com/nsfw/' + "ass").catch(async(err) =>{
-// if (err.message.endsWith(401)){
-//             let APIKEYs = await prompt("Please enter a VALID API_KEY");
-//             if (!APIKEYs) await heck();
-//             localStorage.setItem("API_KEY", APIKEYs);
-//             return heck()
-//         } else {}
-//     })
-// }
-//     heck()
-    let j = 0;
-    __storage = __storage.sort(() => Math.random() - 0.5);
-    let __starting_point = Math.floor(Math.random() * __storage.length);
-    console.log(__storage.length)
-    for (j = __starting_point; j < __storage.length; j++) {
-        let __subreddit = __storage[j]
-        try {
-            await new Promise(resolve => setTimeout(resolve, 1000));
-            const response = await axios.get('https://cdn.aunnux.com/api/' + __subreddit).catch(err =>{})
-            __detect = response.data
-            console.log(__detect)
-            __image = __detect
-            var div = await document.createElement('div');
-            document.getElementById("div").appendChild(div);
 
-            var img = await document.createElement('img');
-            img.src = __image
-            img.className = "img-fluid img-thumbnail rounded"
-            img.style = "width:100%"
-            div.appendChild(img);
-        } catch (error) {
-            console.error(error);
-            if (error.message.match("401")) {
-            let APIKEYs = prompt("Last API KEY was invalid; Please provide a valid one:");
-            localStorage.setItem("API_KEY", APIKEYs);    
+        const buttonsContainer = document.getElementById('buttons');
+        const resultContainer = document.getElementById('result');
+        let currentObjectUrl = null;
+        let cz2;
+        mediaSources.forEach(async ({ label, url }) => {
+            const feature = async () => {
+                const cz = await fetch(url);
+                cz2 = await cz.json();
+                return cz2;
+            };
+            const button = document.createElement('button');
+            button.textContent = label;
+            button.addEventListener('click', async () => loadMedia(await feature(), label));
+            buttonsContainer.appendChild(button);
+        });
+
+        async function loadMedia(url, label) {
+            if (currentObjectUrl) {
+                URL.revokeObjectURL(currentObjectUrl);
+                currentObjectUrl = null;
+            }
+            resultContainer.innerHTML = `<div class="status">Loading ${label}...</div>`;
+
+            try {
+                console.log('Response:', String(await url).split('.')[3]);
+
+                const contentType = (String(await url).split('.')[3] || '');
+                const finalUrl = await url;
+                const blob = await url;
+                const mediaType = detectMediaType(finalUrl, contentType);
+
+                if (!mediaType) {
+                    resultContainer.innerHTML = `
+            <div class="status error">Unsupported content type.</div>
+            <div class="url">${url}</div>
+          `;
+                    return;
+                }
+
+                const wrapper = document.createElement('div');
+                wrapper.innerHTML = `
+          <div class="status">Loaded: ${label}</div>
+        `;
+
+                if (mediaType === 'image') {
+                    const img = document.createElement('img');
+                    img.src = cz2;
+                    img.alt = label;
+                    img.className = 'media';
+                    wrapper.appendChild(img);
+                } else {
+                    const video = document.createElement('video');
+                    video.src = cz2;
+                    video.controls = false;
+                    video.autoplay = true;
+                    video.loop = true;
+                    video.muted = false;
+                    video.disablePictureInPicture = true;
+                    video.className = 'media';
+                    wrapper.appendChild(video);
+                }
+
+                resultContainer.innerHTML = '';
+                resultContainer.appendChild(wrapper);
+            } catch (error) {
+                resultContainer.innerHTML = `
+          <div class="status error">Failed to load media.</div>
+          <div class="url">${error.message}</div>
+        `;
             }
         }
-    }
-    for (j = __starting_point - 1; j >= 0; j--) {
-        let __subreddit = __storage[j]
-        try {
-            const response = await axios.get('https://cdn.aunnux.com/api/' + __subreddit);
-            __detect = response.data
-            console.log(__detect)
 
-            __image = response.data
-            var div = await document.createElement('div');
-            document.getElementById("div").appendChild(div);
+        function detectMediaType(url, contentType) {
+            const lowerUrl = url
+            const imageExtension = /(png|jpe?g|gif|webp|bmp|svg)$/i;
+            const videoExtension = /(mp4|webm|ogg|mov|m4v|avi|mkv)$/i;
 
-            var img = await document.createElement('img');
-            img.src = __image
-            img.className = "img-fluid img-thumbnail rounded"
-            img.style = "width:100%"
-            div.appendChild(img);
-        } catch (error) {
-            console.error(error);
-        }
-    }
+            if (imageExtension.test(lowerUrl)) {
+                return 'image';
             }
-   $(document).click(function(a){
-       if (document.getElementById("overlay").style.display == "block"){
-        off()
-       } else {
-       return;
-       }
-    })
-        </script>
+
+            if (videoExtension.test(lowerUrl)) {
+                return 'video';
+            }
+
+            return null;
+        }
+        $(document).click(function (a) {
+            if (document.getElementById("overlay").style.display == "block") {
+                off()
+            } else {
+            }
+        })
+
+        document.addEventListener('contextmenu', (event) => event.preventDefault());
+        document.addEventListener('keydown', (event) => event.key !== 'r' ? event.preventDefault() : window.location.reload());
+    </script>
 </body>
 
 </html>
